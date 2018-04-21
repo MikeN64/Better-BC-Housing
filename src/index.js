@@ -1,8 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {render} from 'react-dom'
+import {HashRouter} from 'react-router-dom'
+
+import App from 'containers/App.js';
+
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+render((
+    <HashRouter>
+      <App/>
+    </HashRouter>
+), document.getElementById('root'));
+
+// the service worker allows the app to load faster by cacheing assets locally
+// and serving it the next visit. service worker disabled for github pages.
+// registerServiceWorker();
