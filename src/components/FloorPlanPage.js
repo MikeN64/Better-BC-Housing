@@ -7,18 +7,14 @@ const StyledFloorPlanPage = styled.div `
 
   margin-top: 0;
 
-  background-color: black;
+  background-color: white;
 
-  h1 {
-    color: white;
-    text-align: center;
-  }
 `;
 
 const FloorPlanPage = () => {
   return (
     <StyledFloorPlanPage>
-      <h1>Header</h1>
+      <h1>Boston College Main Campus</h1>
     </StyledFloorPlanPage>
   );
 }

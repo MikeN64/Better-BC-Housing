@@ -4,12 +4,12 @@ import {viewport} from 'utils/viewport';
 const StyledPage = styled.div `
     background-color: white;
     
-    width: ${viewport.DESKTOP};
+    width: 100vw;
     margin: 0 auto;
 
     @media (max-width: ${viewport.DESKTOP}) {
       padding: 0px 0.5vw;
-      width: 90vw;
+      width: 100vw;
     }
 `;
 
