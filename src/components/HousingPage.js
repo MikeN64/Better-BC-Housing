@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 
+import NinetyHousing from 'images/NinetyHousing.png';
+
 const StyledHousingPage = styled.div `
   margin-top: 0;
 
