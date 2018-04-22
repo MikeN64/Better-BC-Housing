@@ -155,12 +155,6 @@ const housingData = [
   }
 ];
 
-const mapHousing = housingData.map((house, index) => <HouseCard
-  url={house.url}
-  name={house.name}
-  occupancy={house.occupancy}
-  key={index}/>);
-
 class HousingPage extends Component {
   constructor(props) {
     super(props);
@@ -170,13 +164,9 @@ class HousingPage extends Component {
     };
   }
 
-  mouseOut(e) {
-    // this.setState({display: 'none'});
-  }
-
-  mouseOver(e) {
-    // this.setState({display: 'block'});
-  }
+  mapHousing = (occupancy) => {
+    return housingData.map((house, index) => <HouseCard url={house.url} name={house.name} occupancy={occupancy} key={index}/>)
+  };
 
   route = (url) => {
     this
@@ -203,7 +193,7 @@ class HousingPage extends Component {
           <StyledVandy onClick={() => this.route('/housing/Vandy')} src={VandyHousing}/>
         </StyledMap>
         <StyledBar>
-          {mapHousing}
+          {this.mapHousing(this.props.occupancy)}
         </StyledBar>
       </StyledHousingPage>
     );

@@ -54,6 +54,7 @@ class App extends Component {
       userName: 'unnamed',
       userRoom: null,
       userRoomId: null,
+      occupancy: 0
     }
 
     this.getRooms();
@@ -64,8 +65,10 @@ class App extends Component {
       .get('/api')
       .then((response) => {
         this.setState({roomData: response.data});
+        this.calcOccupancy();
         console.log('got rooms.')
       });
+    this.calcOccupancy();
   }
 
   toggleRoom = (id, roomJson) => {
@@ -101,7 +104,7 @@ class App extends Component {
         this.toggleRoom(roomData[id].id.toString(), roomJson);
         console.log('update room');
       });
-      this.setState({userRoom: id,userRoomId: roomData[id].id});
+      this.setState({userRoom: id, userRoomId: roomData[id].id});
     } else if (id === this.state.userRoom) {
       let aval = true;
       const roomData = this.state.roomData;
@@ -122,7 +125,20 @@ class App extends Component {
       });
       this.setState({userRoom: null, userRoomId: null});
     }
+  }
 
+  calcOccupancy = () => {
+    let openRooms = 0;
+
+    let roomData = this.state.roomData;
+    roomData.forEach((element) => {
+      if (element.availability) {
+        openRooms++;
+      }
+    });
+    this.setState({
+      occupancy: (openRooms / 18).toFixed() * 100
+    });
   }
 
   setUsername = (name) => {
@@ -135,7 +151,7 @@ class App extends Component {
     setInterval(() => {
       console.log('tick');
       this.getRooms();
-    }, 1000)
+    }, 300)
   }
 
   render() {
@@ -159,7 +175,7 @@ class App extends Component {
               render={() => {
               return (
                 <StyledPage>
-                  <HousingPage/>
+                  <HousingPage occupancy={this.state.occupancy}/>
                 </StyledPage>
               )
             }}/>

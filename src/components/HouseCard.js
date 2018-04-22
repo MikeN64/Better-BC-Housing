@@ -13,7 +13,9 @@ const StyledCard = styled.div `
   margin-right: 10px;
   width: 150px;
   height: 18vh;
-  background-color: ${props => props.occupancy === 100 ? mainColors.darkblue : mainColors.fadedblue};
+  background-color: ${props => props.occupancy === 100
+  ? mainColors.darkblue
+  : mainColors.fadedblue};
   text-align: center;
   overflow-wrap: break-word;
   word-wrap: break-word;

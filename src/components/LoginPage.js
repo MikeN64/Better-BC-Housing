@@ -125,12 +125,13 @@ class LoginPage extends Component {
                 style={{
                 width: '100%'
               }}
-                class="mdl-textfield mdl-js-textfield">
+                class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input
-                  onChange={this.handleChange}
                   class="mdl-textfield__input"
                   type="text"
-                  id="sample1"/>
+                  id="sample3"
+                  onChange={this.handleChange}/>
+                <label class="mdl-textfield__label" for="sample3">Name:</label>
               </div>
               <button
                 style={{
