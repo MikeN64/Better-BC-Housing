@@ -32,6 +32,9 @@ MongoClient.connect(mongoDB.uri, function(err, client) {
   if (err) throw err;
   var db = client.db(mongoDB.dbname);
 
+  //RESET AVAILABILITY EVERY TIME SERVER RESTARTS.
+  db.collection(mongoDB.collection).updateMany({}, {$set: {availability: true}});
+
   //gets story given mongo ObjectId or entire collection if no given ID
   app.get('/api', (req, res, next) => {
     if (req.query.id != undefined) {

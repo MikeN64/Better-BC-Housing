@@ -1,115 +1,151 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import {withRouter} from "react-router-dom";
+
 import styled from 'styled-components'
 import {keyframes} from 'styled-components'
-import LoginBG from 'images/LoginBG.png'
+import {viewport} from 'utils/viewport.js'
 
-const rotate360 = keyframes`
+import loginBG from 'images/loginBG.png'
+import titleLogo from 'images/titleLogo.png'
+
+const loadIn = keyframes `
   from {
-    transform: rotate(0deg);
+    transform: translateY(-50px);
+    opacity: 0;
   }
 
   to {
-    transform: rotate(360deg);
+    transform: translateY(0px);
+    opacity: 1;
   }
 `;
 
-const StyledLoginPage = styled.body`
+const StyledLoginPage = styled.body `
+  width: 100vw;
   height: 100vh;
-  h1 {
-    text-align: center;
-  }
-
-  h2 {
-    margin-top: 10px;
-    margin-left: 10px;
-    color: #696969;
-  }
+  overflow: hidden;
 `;
 
-const LoginBackground = styled.img`
-  position: absolute;
-  width: 100%;
-  height: 100%;
+const StyledLoginBG = styled.img `
+    position: absolute;
+    top: 0;
+    width: 1920px;
+    left: -200px;
+
+    @media (max-width: ${viewport.MOBILE}) {
+      width: 1280px;
+      left: -500px;
+    }
 `;
 
-const LoginPanel = styled.div`
-  animation: ${rotate360} 2s linear infinite;
-  position: relative;
-  height: 30vh;
-  width: 30%;
-  left: 36%;
-  top: 40%;
-  background-color: #AFEEEE;
-  opacity: 0.75;
-  border-radius: 25px;
-  
-`
-const UserInput = styled.input`
-  position: relative;
-  width: 60%;
-  padding: 0.5em;
-  margin: 0.5em;
-  color: gray;
-  background: white;
-  border: none;
-  border-radius: 3px;
-  `;
+const StyledLoginTitle = styled.img `
+  animation: ${loadIn} 700ms ease-in-out forwards;
+  opacity: 0;
+  animation-delay: 250ms;
+    position: absolute;
 
-const PasswordInput = styled.input`
-  position: relative;
-  width: 60%;
-  padding: 0.5em;
-  margin: 0.5em;
-  color: gray;
-  background: white;
-  border: none;
-  border-radius: 3px;
-  
-  `;
+    display: block;
+    width: 70vw;
+    left: 15vw;
+    top: 50px;
 
-const LoginButton = styled.button`
-  position: relative;
-  top: 33vh;
-  left: 50%;
-  margin: -20px -50px; 
-  background: #4CAF50;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-    `;
+    @media (max-width: ${viewport.MOBILE}) {
+      width: 95vw;
+      top: 50px;
+      left: 2.5vw;
+    }
+`;
+
+const StyledLoginPanel = styled.div `
+  animation: ${loadIn} 700ms ease-in-out forwards;
+  opacity: 0;
+  animation-delay: 450ms;
+
+  height: 275px;
+  width: 400px;
+  
+  top: 250px;
+  margin: auto;
+  padding: 20px;
+  background-color: white;
+
+  
+  @media (max-width: ${viewport.MOBILE}) {
+      width: 95vw;
+      top: 150px;
+    }
+`;
+
+const LoginForm = styled.form `
+  background-color: white;
+`;
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      username: ''
+    }
   }
 
-  changeColor = (newColor) => {
-    this.setState({ color: newColor })
-    console.log(newColor);
+  handleChange = (event) => {
+    this.setState({username: event.target.value});
+  }
+
+  handleSubmit = (event) => {
+    this
+      .props
+      .setUsername(this.state.username);
+    this.route('housing');
+    event.preventDefault();
+  }
+
+  route = (url) => {
+    this
+      .props
+      .history
+      .push(url);
   }
 
   render() {
     return (
       <StyledLoginPage>
-        <h1> Login Page </h1>
-        <LoginBackground src={LoginBG} />
-        <LoginPanel>
-          <h2> Username </h2>
-          <UserInput />
-          <h2> Password </h2>
-          <PasswordInput type="password" id="myInput"/>
-          <LoginButton type="button"
-          onclick="alert('Hello world!')">LOGIN!
-          </LoginButton>
-        </LoginPanel>
-
+        <StyledLoginBG src={loginBG}/>
+        <StyledLoginTitle src={titleLogo}/>
+        <StyledLoginPanel className="mdl-card mdl-shadow--16dp">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Welcome</h2>
+          </div>
+          <div class="mdl-card__supporting-text">
+            A modern redesign of Boston College's housing selection service.
+          </div>
+          <div class="mdl-card__actions">
+            <LoginForm onSubmit={this.handleSubmit}>
+              <div
+                style={{
+                width: '100%'
+              }}
+                class="mdl-textfield mdl-js-textfield">
+                <input
+                  onChange={this.handleChange}
+                  class="mdl-textfield__input"
+                  type="text"
+                  id="sample1"/>
+              </div>
+              <button
+                style={{
+                width: '100%'
+              }}
+                type="submit"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                Login
+              </button>
+            </LoginForm>
+          </div>
+        </StyledLoginPanel>
       </StyledLoginPage>
     );
   }
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

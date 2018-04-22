@@ -1,8 +1,10 @@
 html {
   touch-action: manipulation;
-  overflow-x: hidden;
+  overflow: hidden;
   margin: 0;
   padding: 0;
+  user-select: none;
+  user-drag: none;
 }
 body {
   margin: 0;
@@ -14,7 +16,27 @@ body {
   overflow-x: hidden;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6,p {
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   left: 0;
+}
+h1 {
+  font-weight: 300;
+  font-size: 40px;
+}
+
+h2 {
+  font-weight: 300;
+  font-size: 30px;
+}
+
+h3 {
+  font-weight: 300;
+  font-size: 20px;
+}
+
+a {
+  text-decoration: none;
 }

@@ -5,8 +5,6 @@ import axios from 'axios';
 
 import styled from 'styled-components';
 
-import Header from 'components/Header';
-import Nav from 'components/Nav';
 import StyledPage from 'components/StyledPage';
 
 import LoginPage from 'components/LoginPage';
@@ -17,18 +15,45 @@ import NinetyFloorPlan from 'components/NinetyFloorPlan';
 
 import 'containers/App.css';
 
+const mockData = [
+  {
+    id: 200,
+    availability: true,
+    owner: '.'
+  }, {
+    id: 201,
+    availability: true,
+    owner: '.'
+  }, {
+    id: 202,
+    availability: true,
+    owner: '.'
+  }, {
+    id: 203,
+    availability: true,
+    owner: '.'
+  }, {
+    id: 204,
+    availability: true,
+    owner: '.'
+  }
+];
+
 const StyledScreen = styled.div `
   margin:0;
   width: 100vw;
   height: 100vh;
-  background-color: maroon;
+  background-color: white;
 `;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomData: []
+      roomData: [],
+      userName: 'unnamed',
+      userRoom: null,
+      userRoomId: null,
     }
 
     this.getRooms();
@@ -57,29 +82,53 @@ class App extends Component {
   }
 
   setAvailability = (id) => {
-    let aval = null;
-    const roomData = this.state.roomData;
-    if (roomData[id].availability) {
-      roomData[id].availability = false;
-      aval = false;
-    } else {
-      roomData[id].availability = true;
-      aval = true;
+    if (this.state.userRoom === null) {
+      let aval = false;
+      const roomData = this.state.roomData;
+
+      console.log('room change')
+      const roomJson = {
+        id: roomData[id]
+          .id
+          .toString(),
+        availability: aval,
+        owner: this.state.userName
+      };
+      console.log(roomJson);
+      this.setState({
+        roomData
+      }, () => {
+        this.toggleRoom(roomData[id].id.toString(), roomJson);
+        console.log('update room');
+      });
+      this.setState({userRoom: id,userRoomId: roomData[id].id});
+    } else if (id === this.state.userRoom) {
+      let aval = true;
+      const roomData = this.state.roomData;
+      console.log('room change')
+      const roomJson = {
+        id: roomData[id]
+          .id
+          .toString(),
+        availability: aval,
+        owner: '.'
+      };
+      console.log(roomJson);
+      this.setState({
+        roomData
+      }, () => {
+        this.toggleRoom(roomData[id].id, roomJson);
+        console.log('update room');
+      });
+      this.setState({userRoom: null, userRoomId: null});
     }
-    console.log('room change')
-    const roomJson = {
-      id: roomData[id]
-        .id
-        .toString(),
-      availability: aval
-    };
-    console.log(roomJson);
+
+  }
+
+  setUsername = (name) => {
     this.setState({
-      roomData
-    }, () => {
-      this.toggleRoom(roomData[id].id.toString(), roomJson);
-      console.log('update room');
-    });
+      userName: name
+    }, () => console.log(this.state.userName));
   }
 
   componentDidMount = () => {
@@ -100,7 +149,7 @@ class App extends Component {
               render={() => {
               return (
                 <StyledPage>
-                  <LoginPage/>
+                  <LoginPage setUsername={this.setUsername}/>
                 </StyledPage>
               )
             }}/>
@@ -122,7 +171,10 @@ class App extends Component {
                 <StyledPage>
                   <VandyFloorPlan
                     roomData={this.state.roomData}
-                    setAvailability={this.setAvailability}/>
+                    setAvailability={this.setAvailability}
+                    userRoom={this.state.userRoom}
+                    userRoomId={this.state.userRoomId}
+                    userName={this.state.userName}/>
                 </StyledPage>
               )
             }}/>

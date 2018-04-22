@@ -1,6 +1,10 @@
 {
-  "main.css": "static/css/main.47b625d2.css",
-  "main.css.map": "static/css/main.47b625d2.css.map",
-  "main.js": "static/js/main.264d8ef3.js",
-  "main.js.map": "static/js/main.264d8ef3.js.map"
+  "main.css": "static/css/main.cdd428a1.css",
+  "main.css.map": "static/css/main.cdd428a1.css.map",
+  "main.js": "static/js/main.84c06d7f.js",
+  "main.js.map": "static/js/main.84c06d7f.js.map",
+  "static\\media\\campusMap.png": "static/media/campusMap.237dcbdf.png",
+  "static\\media\\loginBG.png": "static/media/loginBG.aa28fef9.png",
+  "static\\media\\titleLogo.png": "static/media/titleLogo.1e5c9944.png",
+  "static\\media\\vandyBG.png": "static/media/vandyBG.52042f4b.png"
 }
