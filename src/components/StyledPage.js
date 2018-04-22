@@ -7,8 +7,7 @@ const StyledPage = styled.div `
     width: 100vw;
     margin: 0 auto;
 
-    @media (max-width: ${viewport.DESKTOP}) {
-      padding: 0px 0.5vw;
+    @media (max-width: ${viewport.MOBILE}) {
       width: 100vw;
     }
 `;
