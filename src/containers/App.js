@@ -85,7 +85,7 @@ class App extends Component {
   }
 
   setAvailability = (id) => {
-    if (this.state.userRoom === null) {
+    if (this.state.userRoom === null && this.state.roomData[id].availability) {
       let aval = false;
       const roomData = this.state.roomData;
 
