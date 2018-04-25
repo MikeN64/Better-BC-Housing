@@ -1,4 +1,4 @@
-![](demo_images/Title.png)
+![](https://raw.githubusercontent.com/MikeN64/Better-BC-Housing/master/demo_images/Title.PNG)
 
 # Better BC Housing
 
@@ -22,9 +22,9 @@ We hope that this web app will encourage Boston College as well as many other co
 - User friendly and responsive design for a smooth registration process. No more scrambling and clicking through pages.
 - Single Page Application: no delay in page changes, snappy experience!
 
-![](demo_images/HousingPage.png)
-![](demo_images/FloorPlanPage.png)
-![](demo_images/FloorPlanMobile.png)
+![](https://raw.githubusercontent.com/MikeN64/Better-BC-Housing/master/demo_images/HousingPage.PNG)
+![](https://raw.githubusercontent.com/MikeN64/Better-BC-Housing/master/demo_images/FloorPlanPage.PNG)
+![](https://raw.githubusercontent.com/MikeN64/Better-BC-Housing/master/demo_images/FloorPlanMobile.PNG)
 
 ## Installation:
     git clone https://github.com/MikeN64/BBC-Housing.git
